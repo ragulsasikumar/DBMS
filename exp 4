@@ -1,0 +1,91 @@
+1️⃣ Creating a table with PRIMARY KEY
+Q1. Create a Students table with student_id as PRIMARY KEY.
+Answer
+sql
+CREATE TABLE Students (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT
+);
+2️⃣ Adding NOT NULL constraint
+Q2. Create an Employees table where name and salary cannot be NULL.
+Answer
+sql
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    salary DECIMAL(10,2) NOT NULL
+);
+3️⃣ UNIQUE constraint
+Q3. Ensure each employee has a unique email.
+Answer
+sql
+CREATE TABLE EmployeeDetails (
+    emp_id INT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(20)
+);
+4️⃣ CHECK constraint
+Q4. Create a table where age must be greater than 18.
+Answer
+sql
+CREATE TABLE Users (
+    user_id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT CHECK (age > 18)
+);
+5️⃣ DEFAULT constraint
+Q5. Create a products table where default quantity is 1.
+Answer
+sql
+CREATE TABLE Products (
+    product_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    quantity INT DEFAULT 1
+);
+6️⃣ FOREIGN KEY constraint
+Q6. Create an Orders table where customer_id references Customers table.
+Answer
+sql
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    order_date DATE,
+    customer_id INT,
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id)
+);
+7️⃣ Adding a constraint AFTER table creation
+Q7. Add a UNIQUE constraint to the phone column in EmployeeDetails.
+Answer
+sql
+ALTER TABLE EmployeeDetails
+ADD CONSTRAINT unique_phone UNIQUE (phone);
+8️⃣ Dropping a constraint
+Q8. Remove the UNIQUE constraint on phone added earlier.
+Answer
+sql
+ALTER TABLE EmployeeDetails
+DROP CONSTRAINT unique_phone;
+(Name varies by SQL engine)
+
+9️⃣ Using ON DELETE CASCADE
+Q9. Create Orders table where deleting a customer deletes their orders automatically.
+Answer
+sql
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY,
+    customer_id INT,
+    amount DECIMAL(10,2),
+    FOREIGN KEY (customer_id)
+    REFERENCES Customers(customer_id)
+    ON DELETE CASCADE
+);
+🔟 Composite PRIMARY KEY
+Q10. Create a table Enrollments with composite key (student_id, course_id).
+Answer
+sql
+CREATE TABLE Enrollments (
+    student_id INT,
+    course_id INT,
+    enroll_date DATE,
+    PRIMARY KEY (student_id, course_id)
+);
