@@ -1,0 +1,80 @@
+1️⃣ Using COUNT()
+Q1. Count the total number of employees.
+Answer
+sql
+Copy code
+SELECT COUNT(*) AS TotalEmployees
+FROM Employees;
+2️⃣ Using SUM()
+Q2. Calculate the total salary of all employees.
+Answer
+sql
+Copy code
+SELECT SUM(salary) AS TotalSalary
+FROM Employees;
+3️⃣ Using AVG()
+Q3. Find the average salary of employees.
+Answer
+sql
+Copy code
+SELECT AVG(salary) AS AvgSalary
+FROM Employees;
+4️⃣ Using MAX()
+Q4. Find the highest salary among employees.
+Answer
+sql
+Copy code
+SELECT MAX(salary) AS HighestSalary
+FROM Employees;
+5️⃣ Using MIN()
+Q5. Find the lowest salary among employees.
+Answer
+sql
+Copy code
+SELECT MIN(salary) AS LowestSalary
+FROM Employees;
+6️⃣ GROUP BY
+Q6. Find total salary per department.
+Answer
+sql
+Copy code
+SELECT dept_id, SUM(salary) AS DeptTotalSalary
+FROM Employees
+GROUP BY dept_id;
+7️⃣ GROUP BY with COUNT
+Q7. Count the number of employees in each department.
+Answer
+sql
+Copy code
+SELECT dept_id, COUNT(*) AS EmployeeCount
+FROM Employees
+GROUP BY dept_id;
+8️⃣ HAVING clause
+Q8. Find departments with more than 5 employees.
+Answer
+sql
+Copy code
+SELECT dept_id, COUNT(*) AS EmployeeCount
+FROM Employees
+GROUP BY dept_id
+HAVING COUNT(*) > 5;
+9️⃣ Combining AVG and GROUP BY
+Q9. Find average salary per department where average salary > 50000.
+Answer
+sql
+Copy code
+SELECT dept_id, AVG(salary) AS AvgSalary
+FROM Employees
+GROUP BY dept_id
+HAVING AVG(salary) > 50000;
+🔟 Using multiple aggregate functions
+Q10. Display department id, total salary, average salary, and max salary per department.
+Answer
+sql
+Copy code
+SELECT dept_id,
+       SUM(salary) AS TotalSalary,
+       AVG(salary) AS AvgSalary,
+       MAX(salary) AS MaxSalary
+FROM Employees
+GROUP BY dept_id;
