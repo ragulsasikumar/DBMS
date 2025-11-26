@@ -1,0 +1,122 @@
+1️⃣ Creating a Simple BEFORE INSERT Trigger
+Q1. Create a trigger to set created_date to current date before inserting into Employees.
+Answer
+plsql
+Copy code
+CREATE OR REPLACE TRIGGER trg_before_insert_emp
+BEFORE INSERT ON Employees
+FOR EACH ROW
+BEGIN
+    :NEW.created_date := SYSDATE;
+END;
+2️⃣ AFTER INSERT Trigger
+Q2. Create a trigger to display message after inserting a new employee.
+Answer
+plsql
+Copy code
+CREATE OR REPLACE TRIGGER trg_after_insert_emp
+AFTER INSERT ON Employees
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('New employee inserted: ' || :NEW.name);
+END;
+3️⃣ BEFORE UPDATE Trigger
+Q3. Create a trigger to prevent salary decrease.
+Answer
+plsql
+Copy code
+CREATE OR REPLACE TRIGGER trg_before_update_salary
+BEFORE UPDATE ON Employees
+FOR EACH ROW
+BEGIN
+    IF :NEW.salary < :OLD.salary THEN
+        RAISE_APPLICATION_ERROR(-20001, 'Salary cannot be decreased!');
+    END IF;
+END;
+4️⃣ AFTER UPDATE Trigger
+Q4. Create a trigger to log updates in a table Employee_Log.
+Answer
+plsql
+Copy code
+CREATE OR REPLACE TRIGGER trg_after_update_emp
+AFTER UPDATE ON Employees
+FOR EACH ROW
+BEGIN
+    INSERT INTO Employee_Log(emp_id, old_salary, new_salary, updated_on)
+    VALUES(:OLD.emp_id, :OLD.salary, :NEW.salary, SYSDATE);
+END;
+5️⃣ BEFORE DELETE Trigger
+Q5. Prevent deletion of employees from department 10.
+Answer
+plsql
+Copy code
+CREATE OR REPLACE TRIGGER trg_before_delete_emp
+BEFORE DELETE ON Employees
+FOR EACH ROW
+BEGIN
+    IF :OLD.dept_id = 10 THEN
+        RAISE_APPLICATION_ERROR(-20002, 'Cannot delete employee from department 10');
+    END IF;
+END;
+6️⃣ Row-Level Trigger
+Q6. Create a trigger to update last_modified column on each row update.
+Answer
+plsql
+Copy code
+CREATE OR REPLACE TRIGGER trg_row_update
+BEFORE UPDATE ON Employees
+FOR EACH ROW
+BEGIN
+    :NEW.last_modified := SYSDATE;
+END;
+7️⃣ Statement-Level Trigger
+Q7. Display message after any update on Employees table (statement-level).
+Answer
+plsql
+Copy code
+CREATE OR REPLACE TRIGGER trg_stmt_update_emp
+AFTER UPDATE ON Employees
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Employees table updated');
+END;
+8️⃣ Compound Trigger
+Q8. Create a compound trigger to count the number of updated rows.
+Answer
+plsql
+Copy code
+CREATE OR REPLACE TRIGGER trg_compound_update
+FOR UPDATE ON Employees
+COMPOUND TRIGGER
+    v_count NUMBER := 0;
+    BEFORE EACH ROW IS
+    BEGIN
+        v_count := v_count + 1;
+    END BEFORE EACH ROW;
+
+    AFTER STATEMENT IS
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE('Total rows updated: ' || v_count);
+    END AFTER STATEMENT;
+END;
+9️⃣ Trigger with Condition
+Q9. Create a trigger that fires only when salary > 50000.
+Answer
+plsql
+Copy code
+CREATE OR REPLACE TRIGGER trg_high_salary
+BEFORE INSERT OR UPDATE ON Employees
+FOR EACH ROW
+WHEN (NEW.salary > 50000)
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('High salary detected: ' || :NEW.salary);
+END;
+🔟 Disable and Enable Trigger
+Q10. Disable and then enable a trigger named trg_before_insert_emp.
+Answer
+plsql
+Copy code
+-- Disable trigger
+ALTER TRIGGER trg_before_insert_emp DISABLE;
+
+-- Enable trigger
+ALTER TRIGGER trg_before_insert_emp ENABLE;
