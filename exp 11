@@ -1,0 +1,125 @@
+1️⃣ Writing a Simple PL/SQL Block
+Q1. Write a PL/SQL block to display “Hello, World!”.
+Answer
+plsql
+Copy code
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Hello, World!');
+END;
+2️⃣ Declaring Variables
+Q2. Write a PL/SQL block declaring a variable v_name and display it.
+Answer
+plsql
+Copy code
+DECLARE
+    v_name VARCHAR2(50);
+BEGIN
+    v_name := 'John';
+    DBMS_OUTPUT.PUT_LINE('Name: ' || v_name);
+END;
+3️⃣ Using IF-ELSE
+Q3. Display whether a number is positive, negative, or zero.
+Answer
+plsql
+Copy code
+DECLARE
+    v_num NUMBER := 10;
+BEGIN
+    IF v_num > 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Positive');
+    ELSIF v_num < 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Negative');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Zero');
+    END IF;
+END;
+4️⃣ Using FOR Loop
+Q4. Display numbers from 1 to 5 using a FOR loop.
+Answer
+plsql
+Copy code
+BEGIN
+    FOR i IN 1..5 LOOP
+        DBMS_OUTPUT.PUT_LINE(i);
+    END LOOP;
+END;
+5️⃣ Using WHILE Loop
+Q5. Display numbers from 1 to 5 using a WHILE loop.
+Answer
+plsql
+Copy code
+DECLARE
+    i NUMBER := 1;
+BEGIN
+    WHILE i <= 5 LOOP
+        DBMS_OUTPUT.PUT_LINE(i);
+        i := i + 1;
+    END LOOP;
+END;
+6️⃣ Using Simple Exception Handling
+Q6. Handle divide by zero exception.
+Answer
+plsql
+Copy code
+DECLARE
+    v_num1 NUMBER := 10;
+    v_num2 NUMBER := 0;
+    v_result NUMBER;
+BEGIN
+    v_result := v_num1 / v_num2;
+    DBMS_OUTPUT.PUT_LINE('Result: ' || v_result);
+EXCEPTION
+    WHEN ZERO_DIVIDE THEN
+        DBMS_OUTPUT.PUT_LINE('Cannot divide by zero');
+END;
+7️⃣ Using Nested Blocks
+Q7. Demonstrate a nested PL/SQL block.
+Answer
+plsql
+Copy code
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Outer Block');
+    DECLARE
+        v_msg VARCHAR2(20) := 'Inner Block';
+    BEGIN
+        DBMS_OUTPUT.PUT_LINE(v_msg);
+    END;
+END;
+8️⃣ Using SELECT INTO
+Q8. Fetch employee name into a variable.
+Answer
+plsql
+Copy code
+DECLARE
+    v_name Employees.name%TYPE;
+BEGIN
+    SELECT name INTO v_name
+    FROM Employees
+    WHERE emp_id = 101;
+    
+    DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_name);
+END;
+9️⃣ Using PL/SQL Constants
+Q9. Declare a constant and display it.
+Answer
+pl
+Copy code
+DECLARE
+    c_pi CONSTANT NUMBER := 3.14159;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Value of Pi: ' || c_pi);
+END;
+🔟 Using Boolean Variable
+Q10. Use a Boolean variable in PL/SQL.
+Answer
+plsql
+Copy code
+DECLARE
+    is_valid BOOLEAN := TRUE;
+BEGIN
+    IF is_valid THEN
+        DBMS_OUTPUT.PUT_LINE('Valid');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Invalid');
+    END IF;
+END;
