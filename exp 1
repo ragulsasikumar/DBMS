@@ -1,0 +1,80 @@
+1️⃣ Create a basic table
+Q1. Create a table named Students with columns: id, name, age, city.
+Answer:
+sql
+CREATE TABLE Students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    age INT,
+    city VARCHAR(50)
+);
+2️⃣ Insert a single row
+Q2. Insert a student record: (1, 'John', 20, 'Delhi').
+Answer:
+sql
+INSERT INTO Students (id, name, age, city)
+VALUES (1, 'John', 20, 'Delhi');
+3️⃣ Insert multiple rows
+Q3. Insert three records at once.
+Answer:
+sql
+INSERT INTO Students (id, name, age, city)
+VALUES
+(2, 'Riya', 22, 'Mumbai'),
+(3, 'Amit', 21, 'Chennai'),
+(4, 'Sara', 23, 'Kolkata');
+4️⃣ Update a row
+Q4. Update the city of the student with id = 3 to 'Bangalore'.
+Answer:
+sql
+UPDATE Students
+SET city = 'Bangalore'
+WHERE id = 3;
+5️⃣ Update multiple fields
+Q5. Update age to 25 and city to 'Pune' for id = 2.
+Answer:
+sql
+UPDATE Students
+SET age = 25, city = 'Pune'
+WHERE id = 2;
+6️⃣ Delete a row
+Q6. Delete the student whose id = 4.
+Answer:
+sql
+DELETE FROM Students
+WHERE id = 4;
+7️⃣ Delete multiple rows
+Q7. Delete all students whose age < 22.
+Answer:
+sql
+DELETE FROM Students
+WHERE age < 22;
+8️⃣ Create table with constraints
+Q8. Create a table Employees with NOT NULL and UNIQUE constraints.
+Answer:
+sql
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    salary DECIMAL(10,2)
+);
+9️⃣ Insert NULL values (valid case)
+Q9. Insert an employee record without an email.
+Answer:
+sql
+INSERT INTO Employees (emp_id, name, salary)
+VALUES (101, 'Varun', 45000);
+(Valid because email can be NULL.)
+
+🔟 Insert violating constraint (example + correction)**
+Q10. Try inserting a duplicate emp_id and then correct it.
+Answer:
+sql
+INSERT INTO Employees (emp_id, name, email, salary)
+VALUES (101, 'Harsh', 'harsh@mail.com', 38000);
+
+sql
+Copy code
+INSERT INTO Employees (emp_id, name, email, salary)
+VALUES (102, 'Harsh', 'harsh@mail.com', 38000);
