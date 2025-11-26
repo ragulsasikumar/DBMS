@@ -1,0 +1,94 @@
+1️⃣ Inner Join
+Q1. Retrieve all orders with customer names.
+Tables: Orders(order_id, customer_id, amount) and Customers(customer_id, name)
+
+Answer
+sql
+Copy code
+SELECT o.order_id, c.name, o.amount
+FROM Orders o
+INNER JOIN Customers c
+ON o.customer_id = c.customer_id;
+2️⃣ Left Join
+Q2. Get all customers and their orders, including customers with no orders.
+Answer
+sql
+Copy code
+SELECT c.customer_id, c.name, o.order_id, o.amount
+FROM Customers c
+LEFT JOIN Orders o
+ON c.customer_id = o.customer_id;
+3️⃣ Right Join
+Q3. List all orders and customer names, including orders with missing customer info.
+Answer
+sql
+Copy code
+SELECT o.order_id, c.name, o.amount
+FROM Orders o
+RIGHT JOIN Customers c
+ON o.customer_id = c.customer_id;
+4️⃣ Full Outer Join
+Q4. Show all customers and orders, matching where possible.
+Answer (PostgreSQL / SQL Server)
+sql
+Copy code
+SELECT c.customer_id, c.name, o.order_id, o.amount
+FROM Customers c
+FULL OUTER JOIN Orders o
+ON c.customer_id = o.customer_id;
+5️⃣ Self Join
+Q5. Display employees and their managers from the Employees(emp_id, name, manager_id) table.
+Answer
+sql
+Copy code
+SELECT e1.name AS Employee, e2.name AS Manager
+FROM Employees e1
+LEFT JOIN Employees e2
+ON e1.manager_id = e2.emp_id;
+6️⃣ Cross Join
+Q6. Show all combinations of products and categories.
+Answer
+sql
+Copy code
+SELECT p.product_name, c.category_name
+FROM Products p
+CROSS JOIN Categories c;
+7️⃣ Join with WHERE filter
+Q7. Get orders with amount > 500 and customer names.
+Answer
+sql
+Copy code
+SELECT o.order_id, c.name, o.amount
+FROM Orders o
+JOIN Customers c
+ON o.customer_id = c.customer_id
+WHERE o.amount > 500;
+8️⃣ Using Aliases
+Q8. Join tables with aliases for readability.
+Answer
+sql
+Copy code
+SELECT c.name AS CustomerName, o.amount AS OrderAmount
+FROM Customers AS c
+INNER JOIN Orders AS o
+ON c.customer_id = o.customer_id;
+9️⃣ Join multiple tables
+Q9. Retrieve employee name, department name, and manager name.
+Tables: Employees(emp_id, name, manager_id, dept_id) and Departments(dept_id, dept_name)
+
+Answer
+sql
+Copy code
+SELECT e.name AS Employee, d.dept_name, m.name AS Manager
+FROM Employees e
+JOIN Departments d ON e.dept_id = d.dept_id
+LEFT JOIN Employees m ON e.manager_id = m.emp_id;
+🔟 Using JOIN with GROUP BY
+Q10. Get total order amount for each customer.
+Answer
+sql
+Copy code
+SELECT c.name, SUM(o.amount) AS TotalAmount
+FROM Customers c
+JOIN Orders o ON c.customer_id = o.customer_id
+GROUP BY c.name;
