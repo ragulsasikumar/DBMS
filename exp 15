@@ -1,0 +1,76 @@
+1️⃣ Creating a Sequence
+Q1. Create a sequence to generate employee IDs starting from 1001.
+Answer
+sql
+Copy code
+CREATE SEQUENCE emp_seq
+START WITH 1001
+INCREMENT BY 1
+NOCACHE;
+2️⃣ Using a Sequence in INSERT
+Q2. Insert a new employee using emp_seq for emp_id.
+Answer
+sql
+Copy code
+INSERT INTO Employees(emp_id, name, salary)
+VALUES (emp_seq.NEXTVAL, 'David', 55000);
+3️⃣ Creating an Index
+Q3. Create an index on the name column of Employees.
+Answer
+sql
+Copy code
+CREATE INDEX idx_emp_name ON Employees(name);
+4️⃣ Dropping an Index
+Q4. Drop the index idx_emp_name.
+Answer
+sql
+Copy code
+DROP INDEX idx_emp_name;
+5️⃣ Creating a Synonym
+Q5. Create a synonym emp for the Employees table.
+Answer
+sql
+Copy code
+CREATE SYNONYM emp FOR Employees;
+6️⃣ Dropping a Synonym
+Q6. Drop the synonym emp.
+sql
+Copy code
+DROP SYNONYM emp;
+7️⃣ Creating a Database View
+Q7. Create a view HighSalaryEmployees for employees with salary > 50000.
+sql
+Copy code
+CREATE VIEW HighSalaryEmployees AS
+SELECT emp_id, name, salary
+FROM Employees
+WHERE salary > 50000;
+8️⃣ Creating a Materialized View
+Q8. Create a materialized view to store total salary per department.
+sql
+Copy code
+CREATE MATERIALIZED VIEW DeptSalarySummary AS
+SELECT dept_id, SUM(salary) AS total_salary
+FROM Employees
+GROUP BY dept_id;
+9️⃣ Creating a Table Partition
+Q9. Partition Orders table by range of order_date.
+sql
+Copy code
+CREATE TABLE Orders_Partitioned (
+    order_id NUMBER,
+    order_date DATE,
+    customer_id NUMBER,
+    amount NUMBER
+)
+PARTITION BY RANGE(order_date) (
+    PARTITION p1 VALUES LESS THAN (TO_DATE('2024-01-01','YYYY-MM-DD')),
+    PARTITION p2 VALUES LESS THAN (TO_DATE('2025-01-01','YYYY-MM-DD'))
+);
+🔟 Creating a Database Link
+Q10. Create a database link to another database.
+sql
+Copy code
+CREATE DATABASE LINK remote_db
+CONNECT TO remote_user IDENTIFIED BY password
+USING 'remote_tns';
