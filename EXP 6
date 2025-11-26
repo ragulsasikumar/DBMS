@@ -1,0 +1,78 @@
+1️⃣ Using WHERE to Restrict Data
+Q1. Retrieve employees who earn more than 40,000.
+Answer
+sql
+SELECT *
+FROM Employees
+WHERE salary > 40000;
+2️⃣ Using ORDER BY Ascending
+Q2. Display employees sorted by name in ascending order.
+Answer
+sql
+SELECT *
+FROM Employees
+ORDER BY name ASC;
+3️⃣ Using ORDER BY Descending
+Q3. Display products sorted by price in descending order.
+Answer
+sql
+SELECT *
+FROM Products
+ORDER BY price DESC;
+4️⃣ Filtering with BETWEEN
+Q4. Retrieve employees whose salary is between 30000 and 60000.
+Answer
+sql
+SELECT *
+FROM Employees
+WHERE salary BETWEEN 30000 AND 60000;
+5️⃣ Filtering with IN
+Q5. Retrieve customers from cities Delhi, Mumbai, and Pune.
+Answer
+sql
+SELECT *
+FROM Customers
+WHERE city IN ('Delhi', 'Mumbai', 'Pune');
+6️⃣ Filtering with LIKE
+Q6. Retrieve employees whose names start with 'S'.
+Answer
+sql
+SELECT *
+FROM Employees
+WHERE name LIKE 'S%';
+7️⃣ Using DISTINCT
+Q7. Retrieve all unique departments from the Employees table.
+Answer
+sql
+SELECT DISTINCT department_id
+FROM Employees;
+8️⃣ Combining Conditions with AND
+Q8. Retrieve employees from department 10 with salary > 50000.
+Answer
+sql
+SELECT *
+FROM Employees
+WHERE department_id = 10
+  AND salary > 50000;
+9️⃣ Combining Conditions with OR
+Q9. Retrieve employees who work in department 20 OR earn more than 60000.
+Answer
+sql
+SELECT *
+FROM Employees
+WHERE department_id = 20
+   OR salary > 60000;
+🔟 Limiting Rows
+Q10. Display the first 5 records from the Orders table.
+Answer
+MySQL / PostgreSQL / SQLite:
+
+sql
+SELECT *
+FROM Orders
+LIMIT 5;
+SQL Server:
+
+sql
+SELECT TOP 5 *
+FROM Orders;
