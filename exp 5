@@ -1,0 +1,75 @@
+1️⃣ Creating a Simple View
+Q1. Create a view named EmployeeView showing emp_id, name, and salary from Employees.
+Answer
+sql
+CREATE VIEW EmployeeView AS
+SELECT emp_id, name, salary
+FROM Employees;
+2️⃣ Selecting from a View
+Q2. Display all records from the EmployeeView.
+Answer
+sql
+SELECT * FROM EmployeeView;
+3️⃣ Creating a View with WHERE condition
+Q3. Create a view HighSalaryEmp that shows employees with salary > 50000.
+Answer
+sql
+CREATE VIEW HighSalaryEmp AS
+SELECT emp_id, name, salary
+FROM Employees
+WHERE salary > 50000;
+4️⃣ Creating a View with JOIN
+Q4. Create a view OrderDetailsView showing customer name and order amount.
+Assume tables: Customers(customer_id, name) and Orders(order_id, customer_id, amount)
+Answer
+sql
+CREATE VIEW OrderDetailsView AS
+SELECT c.name AS customer_name, o.amount
+FROM Customers c
+JOIN Orders o ON c.customer_id = o.customer_id;
+5️⃣ Updating a View (Updatable View)
+Q5. Update salary using a view (EmployeeView).
+Answer
+sql
+UPDATE EmployeeView
+SET salary = 60000
+WHERE emp_id = 101;
+(Works only if view is simple and updatable.)
+
+6️⃣ Creating a View with Aggregation
+Q6. Create a view showing each department’s average salary.
+Answer
+sql
+CREATE VIEW DeptAvgSalary AS
+SELECT department_id, AVG(salary) AS avg_salary
+FROM Employees
+GROUP BY department_id;
+7️⃣ Creating a View with DISTINCT
+Q7. Create a view showing unique job titles.
+Answer
+sql
+CREATE VIEW UniqueJobTitles AS
+SELECT DISTINCT job_title
+FROM Employees;
+8️⃣ Replacing an Existing View
+Q8. Modify EmployeeView to include department_id also.
+Answer
+sql
+CREATE OR REPLACE VIEW EmployeeView AS
+SELECT emp_id, name, salary, department_id
+FROM Employees;
+(MySQL, PostgreSQL support this; SQL Server uses ALTER VIEW)
+
+9️⃣ Creating a Read-Only View
+Q9. Create a view that cannot be updated.
+Answer
+sql
+CREATE VIEW ReadOnlyEmployees AS
+SELECT emp_id, name, salary
+FROM Employees
+WITH CHECK OPTION;
+🔟 Dropping a View
+Q10. Drop the view named HighSalaryEmp.
+Answer
+sql
+DROP VIEW HighSalaryEmp;
