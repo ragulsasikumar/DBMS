@@ -1,0 +1,80 @@
+1️⃣ Insert a Record
+Q1. Insert a new product into the Products table (id=101, name='Laptop', price=55000).
+Answer
+sql
+INSERT INTO Products (id, name, price)
+VALUES (101, 'Laptop', 55000);
+2️⃣ Insert Multiple Records
+Q2. Insert three employees at once.
+Answer
+sql
+INSERT INTO Employees (emp_id, emp_name, salary)
+VALUES
+(1, 'Rohit', 30000),
+(2, 'Neha', 35000),
+(3, 'Karan', 40000);
+3️⃣ Update a Specific Record
+Q3. Update salary of employee with emp_id = 2 to 38000.
+Answer
+sql
+UPDATE Employees
+SET salary = 38000
+WHERE emp_id = 2;
+4️⃣ Update Multiple Columns
+Q4. Change product name to 'Gaming Laptop' and price to 62000 for id = 101.
+Answer
+sql
+UPDATE Products
+SET name = 'Gaming Laptop', price = 62000
+WHERE id = 101;
+5️⃣ Delete a Specific Record
+Q5. Delete employee whose emp_id = 1.
+Answer
+sql
+DELETE FROM Employees
+WHERE emp_id = 1;
+6️⃣ Delete Records Based on Condition
+Q6. Delete all employees with salary < 35000.
+Answer
+sql
+DELETE FROM Employees
+WHERE salary < 35000;
+7️⃣ Select All Records
+Q7. Retrieve all records from the Products table.
+Answer
+sql
+SELECT * FROM Products;
+8️⃣ Select Records With Filters
+Q8. Retrieve products with price > 50000.
+Answer
+sql
+SELECT * FROM Products
+WHERE price > 50000;
+9️⃣ Using UPSERT (INSERT OR UPDATE)
+**Q9. Insert employee (emp_id=4, name='Vikas', salary=45000).
+If emp_id already exists, update salary.**
+Answer (PostgreSQL/SQLite style):
+sql
+INSERT INTO Employees (emp_id, emp_name, salary)
+VALUES (4, 'Vikas', 45000)
+ON CONFLICT(emp_id)
+DO UPDATE SET salary = EXCLUDED.salary;
+MySQL version:
+sql
+INSERT INTO Employees (emp_id, emp_name, salary)
+VALUES (4, 'Vikas', 45000)
+ON DUPLICATE KEY UPDATE salary = VALUES(salary);
+🔟 MERGE Operation
+**Q10. Merge new data into Products:
+If id matches → Update price
+If not → Insert new product**
+Answer (SQL Server / Oracle):
+sql
+MERGE INTO Products AS target
+USING (SELECT 101 AS id, 'Laptop' AS name, 58000 AS price) AS source
+ON (target.id = source.id)
+WHEN MATCHED THEN
+    UPDATE SET price = source.price
+WHEN NOT MATCHED THEN
+    INSERT (id, name, price)
+    VALUES (source.id, source.name, source.price);
