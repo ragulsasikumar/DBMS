@@ -1,0 +1,75 @@
+1️⃣ Insert a Document
+Q1. Insert a document into the employees collection.
+Answer
+javascript
+Copy code
+db.employees.insertOne({
+    emp_id: 101,
+    name: "John",
+    department: "Sales",
+    salary: 50000
+});
+2️⃣ Insert Multiple Documents
+Q2. Insert multiple documents into employees.
+Answer
+javascript
+Copy code
+db.employees.insertMany([
+    { emp_id: 102, name: "Alice", department: "HR", salary: 45000 },
+    { emp_id: 103, name: "Bob", department: "IT", salary: 60000 }
+]);
+3️⃣ Find All Documents
+Q3. Retrieve all employees.
+Answer
+javascript
+Copy code
+db.employees.find();
+4️⃣ Find with Condition
+Q4. Retrieve employees with salary greater than 50000.
+Answer
+javascript
+Copy code
+db.employees.find({ salary: { $gt: 50000 } });
+5️⃣ Update a Document
+Q5. Increase salary of employee with emp_id 101 by 10%.
+Answer
+javascript
+Copy code
+db.employees.updateOne(
+    { emp_id: 101 },
+    { $mul: { salary: 1.10 } }
+);
+6️⃣ Update Multiple Documents
+Q6. Increase salary of all employees in IT department by 5%.
+Answer
+javascript
+Copy code
+db.employees.updateMany(
+    { department: "IT" },
+    { $mul: { salary: 1.05 } }
+);
+7️⃣ Delete a Document
+Q7. Delete employee with emp_id 102.
+Answer
+javascript
+Copy code
+db.employees.deleteOne({ emp_id: 102 });
+8️⃣ Delete Multiple Documents
+Q8. Delete all employees in HR department.
+javascript
+Copy code
+db.employees.deleteMany({ department: "HR" });
+9️⃣ Sorting Documents
+Q9. Retrieve employees sorted by salary descending.
+Answer
+javascript
+Copy code
+db.employees.find().sort({ salary: -1 });
+🔟 Aggregation
+Q10. Calculate average salary of employees.
+Answer
+javascript
+Copy code
+db.employees.aggregate([
+    { $group: { _id: null, avgSalary: { $avg: "$salary" } } }
+]);
