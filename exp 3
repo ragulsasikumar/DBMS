@@ -1,0 +1,73 @@
+1️⃣ Select all columns
+Q1. Write a query to display all columns from the Employees table.
+Answer
+sql
+SELECT * FROM Employees;
+2️⃣ Select specific columns
+Q2. Display only name and salary from the Employees table.
+Answer
+sql
+SELECT name, salary
+FROM Employees;
+3️⃣ Using WHERE clause
+Q3. Select employees whose salary is greater than 40000.
+Answer
+sql
+SELECT *
+FROM Employees
+WHERE salary > 40000;
+4️⃣ Using aliases
+Q4. Display employee name as EmployeeName and salary as MonthlySalary.
+Answer
+sql
+SELECT name AS EmployeeName,
+       salary AS MonthlySalary
+FROM Employees;
+5️⃣ Using DISTINCT
+Q5. Display unique job titles from the Employees table.
+Answer
+sql
+SELECT DISTINCT job_title
+FROM Employees;
+6️⃣ Using ORDER BY
+Q6. List all employees sorted by their salary in descending order.
+Answer
+sql
+SELECT *
+FROM Employees
+ORDER BY salary DESC;
+7️⃣ Using BETWEEN
+Q7. Select employees whose salary is between 30000 and 50000.
+Answer
+sql
+SELECT *
+FROM Employees
+WHERE salary BETWEEN 30000 AND 50000;
+8️⃣ Using IN operator
+Q8. Select employees who work in departments 10, 20, or 30.
+Answer
+sql
+SELECT *
+FROM Employees
+WHERE department_id IN (10, 20, 30);
+9️⃣ Using LIKE
+Q9. Select employees whose name starts with 'A'.
+Answer
+sql
+SELECT *
+FROM Employees
+WHERE name LIKE 'A%';
+🔟 Using LIMIT / TOP
+Q10. Display the first 5 employees.
+Answer
+MySQL / PostgreSQL / SQLite:
+sql
+SELECT *
+FROM Employees
+LIMIT 5;
+SQL Server:
+
+sql
+Copy code
+SELECT TOP 5 *
+FROM Employees;
