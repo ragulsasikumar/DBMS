@@ -1,0 +1,86 @@
+1️⃣ Simple Subquery
+Q1. Retrieve employees whose salary is greater than the average salary.
+Answer
+sql
+Copy code
+SELECT name, salary
+FROM Employees
+WHERE salary > (SELECT AVG(salary) FROM Employees);
+2️⃣ Subquery in SELECT
+Q2. Display each employee’s name and the department name using a subquery.
+Answer
+sql
+Copy code
+SELECT name,
+       (SELECT dept_name 
+        FROM Departments d 
+        WHERE d.dept_id = e.dept_id) AS Department
+FROM Employees e;
+3️⃣ Subquery with IN
+Q3. Find employees working in departments 10 or 20.
+Answer
+sql
+Copy code
+SELECT name
+FROM Employees
+WHERE dept_id IN (SELECT dept_id FROM Departments WHERE dept_id IN (10, 20));
+4️⃣ Subquery with NOT IN
+Q4. Find customers who did not place any orders.
+Answer
+sql
+Copy code
+SELECT name
+FROM Customers
+WHERE customer_id NOT IN (SELECT customer_id FROM Orders);
+5️⃣ Correlated Subquery
+Q5. Retrieve employees whose salary is above the average in their department.
+Answer
+sql
+Copy code
+SELECT e1.name, e1.salary, e1.dept_id
+FROM Employees e1
+WHERE e1.salary > (SELECT AVG(e2.salary) 
+                   FROM Employees e2 
+                   WHERE e2.dept_id = e1.dept_id);
+6️⃣ Subquery with EXISTS
+Q6. Find customers who have placed at least one order.
+Answer
+sql
+Copy code
+SELECT name
+FROM Customers c
+WHERE EXISTS (SELECT 1 FROM Orders o WHERE o.customer_id = c.customer_id);
+7️⃣ Subquery in FROM
+Q7. Find the maximum salary and display employees earning that salary.
+Answer
+sql
+Copy code
+SELECT name, salary
+FROM Employees
+WHERE salary = (SELECT MAX(salary) FROM Employees);
+8️⃣ Subquery with ALL
+Q8. Find employees whose salary is higher than all employees in department 10.
+Answer
+sql
+Copy code
+SELECT name, salary
+FROM Employees
+WHERE salary > ALL (SELECT salary FROM Employees WHERE dept_id = 10);
+9️⃣ Subquery with ANY / SOME
+Q9. Find employees whose salary is higher than any employee in department 20.
+Answer
+sql
+Copy code
+SELECT name, salary
+FROM Employees
+WHERE salary > ANY (SELECT salary FROM Employees WHERE dept_id = 20);
+🔟 Nested Subqueries
+Q10. Find the name of the employee with the second highest salary.
+Answer
+sql
+Copy code
+SELECT name, salary
+FROM Employees
+WHERE salary = (SELECT MAX(salary) 
+                FROM Employees
+                WHERE salary < (SELECT MAX(salary) FROM Employees));
