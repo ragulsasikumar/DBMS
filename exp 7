@@ -1,0 +1,92 @@
+1️⃣ Using UNION
+Q1. Combine employee names from Employees_2023 and Employees_2024 without duplicates.
+Answer
+sql
+Copy code
+SELECT name FROM Employees_2023
+UNION
+SELECT name FROM Employees_2024;
+2️⃣ Using UNION ALL
+Q2. Combine product lists from two tables with duplicates allowed.
+Answer
+sql
+Copy code
+SELECT product_name FROM Branch1_Products
+UNION ALL
+SELECT product_name FROM Branch2_Products;
+3️⃣ Using INTERSECT
+Q3. Find students who appear in both MathClass and ScienceClass.
+Answer (PostgreSQL, Oracle):
+sql
+Copy code
+SELECT student_id FROM MathClass
+INTERSECT
+SELECT student_id FROM ScienceClass;
+4️⃣ Using MINUS / EXCEPT
+Q4. Find customers who made orders last year but not this year.
+Answer
+Oracle (MINUS):
+
+sql
+Copy code
+SELECT customer_id FROM Orders_2023
+MINUS
+SELECT customer_id FROM Orders_2024;
+PostgreSQL/SQL Server (EXCEPT):
+
+sql
+Copy code
+SELECT customer_id FROM Orders_2023
+EXCEPT
+SELECT customer_id FROM Orders_2024;
+5️⃣ Using UNION with ORDER BY
+Q5. Combine student names from two departments and sort alphabetically.
+Answer
+sql
+Copy code
+SELECT name FROM Dept_A
+UNION
+SELECT name FROM Dept_B
+ORDER BY name ASC;
+6️⃣ Using UNION for different constants
+Q6. Add a label to each dataset while combining them.
+Answer
+sql
+Copy code
+SELECT name, 'Old' AS source FROM OldEmployees
+UNION ALL
+SELECT name, 'New' AS source FROM NewEmployees;
+7️⃣ Using INTERSECT with WHERE
+Q7. Find employees who work in both Dept 10 and Dept 20.
+Answer
+sql
+Copy code
+SELECT emp_id FROM Employees
+WHERE department_id = 10
+INTERSECT
+SELECT emp_id FROM Employees
+WHERE department_id = 20;
+8️⃣ Using EXCEPT with conditions
+Q8. List products in Warehouse_A that are NOT in Warehouse_B.
+Answer
+sql
+Copy code
+SELECT product_id FROM Warehouse_A
+EXCEPT
+SELECT product_id FROM Warehouse_B;
+9️⃣ Union of different column values
+Q9. Combine IDs from two unrelated tables using UNION.
+Answer
+sql
+Copy code
+SELECT student_id AS id FROM Students
+UNION
+SELECT emp_id AS id FROM Employees;
+🔟 Using UNION with DISTINCT effect
+Q10. Show unique cities from Customers and Suppliers.
+Answer
+sql
+Copy code
+SELECT city FROM Customers
+UNION
+SELECT city FROM Suppliers;
